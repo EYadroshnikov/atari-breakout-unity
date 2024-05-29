@@ -1,7 +1,5 @@
 ## Atari Breakout
 
-![Atari Breakout]
-
 Welcome to Atari Breakout, a classic arcade game where you control a paddle to bounce a ball and break bricks!
 
 ### How to Play
