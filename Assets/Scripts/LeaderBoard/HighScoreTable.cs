@@ -45,7 +45,7 @@ public class HighScoreTable : MonoBehaviour
     IEnumerator GetLeaderBoard(int page = 1)
     {
         // Отправка GET-запроса
-        using (UnityWebRequest webRequest = UnityWebRequest.Get($"localhost:3000/scores?page={page}"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get($"localhost:3000/scores?page={page}&take=8"))
         {
             // Ожидание ответа от сервера
             yield return webRequest.SendWebRequest();
@@ -64,7 +64,7 @@ public class HighScoreTable : MonoBehaviour
                 entryTemplate = entryContainer.Find("HighScoreEntryTemplate");
                 entryTemplate.gameObject.SetActive(false);
 
-                float templateHeight = 36f;
+                float templateHeight = 72f;
                 for (int i = 0; i < this.response.data.Count; i++)
                 {
                     Transform entryTransform = Instantiate(entryTemplate, entryContainer);
@@ -73,7 +73,7 @@ public class HighScoreTable : MonoBehaviour
                     entryTransform.gameObject.SetActive(true);
                     entrytransforms.Add(entryTransform);
 
-                    entryTransform.Find("PositionText").GetComponent<TextMeshProUGUI>().text = ((response.meta.page - 1) * 10 + i + 1).ToString();
+                    entryTransform.Find("PositionText").GetComponent<TextMeshProUGUI>().text = ((response.meta.page - 1) * 8 + i + 1).ToString();
                     entryTransform.Find("NicknameText").GetComponent<TextMeshProUGUI>().text = response.data[i].nickname;
                     entryTransform.Find("ScoreText").GetComponent<TextMeshProUGUI>().text = response.data[i].score.ToString();
                 }
